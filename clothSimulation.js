@@ -1,19 +1,8 @@
 /**
- * This javasctript class for the generate the cloth and behaviour using the jMaths.js class
- * Author :Indika Rajanayake
- *        :2007/mcs/041
- *
- *
+ * This javasctript generates the cloth and behaviour using the jMaths.js class
  */
 
-
-
-
-/**
- * this is the global variable for store the variables realated to the cloth generation
- *
- */
-
+ //global variable for store the variables realated to the cloth generation
 var _appGlobalVariables = {
     ctx:null,
     width:null,
@@ -25,7 +14,6 @@ var _appGlobalVariables = {
     springArray:new Array(),
     gravity:null,
     time:0.05
-
 }
 
 /**
@@ -45,19 +33,11 @@ function generateArray() {
 }
 
 
-//var savedMouseCoords = null;
-//var selectPointmass;
-//var tempVector = new _2dVector(0.0, 0.0);
-//var s1 = new Array();
-
 /**
- *  This is the main javasctript function for the cloth simulation
+ * main javasctript function for the cloth simulation
  * @param width
  * @param height
  */
-
-
-
 function _clothSimulation(width, height) {
     var canvas = document.getElementById('clothSimulation');   //get the canvas tag from the refered HTML5 page
     _appGlobalVariables.ctx = canvas.getContext('2d');
@@ -69,18 +49,14 @@ function _clothSimulation(width, height) {
 }
 
 /**
- * This is the function to generate the cloth using the masspoints and springs in the jMath.js file
+ * function to generate the cloth using the masspoints and springs in the jMath.js file
  *
  */
-
-
 function generateClothStructure() {
     _appGlobalVariables.numberofColumns = 13;  //set the number of columnsof masses for the cloth
     _appGlobalVariables.numberOfRows = 12;     //set the number of rows of masses for the cloth
 
-
-    //generate the cloth structure by using given mass points columns ans springs
-
+    //generate the cloth structure by using given mass points columns and springs
     for (var rows = 0; rows < _appGlobalVariables.numberOfRows; rows++) {
         for (var cols = 0; cols < _appGlobalVariables.numberofColumns; cols++) {
             var x = (10 + cols) * 25;
@@ -100,19 +76,14 @@ function generateClothStructure() {
                 _appGlobalVariables.springArray.push(spring); //push the spring to the array
             }
             _appGlobalVariables.massPointArray.push(massPoint);  //push the masspoints for the array
-
         }
     }
-
 }
 
 /**
- * This the function for the do the behaviour of the cloth
+ * function for the do the behaviour of the cloth
  *
  */
-
-
-
 function behaviourOfCloths() {
 
     var pointArray = new generateArray(); //this is the generate the array for the calculation

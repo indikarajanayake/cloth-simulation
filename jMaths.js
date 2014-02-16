@@ -1,26 +1,14 @@
 /**
- * This is the java sctript class for the do the calculation for the masses and the spring 
- * This class basically done the calculation using the JavaScript array work like hash map
- *
- *  Author :Indika Rajayake
- *          2007/mcs/041
- *
+ * java sctript class for the do the calculation for the masses and the spring 
  */
 
 
-
-
-
-
-/** This is the vector class to handle the calculations realted to the vectors.
- ** this get the  hash mapstyle array for the calculaion
+/** vector class to handle the calculations realted to the vectors.
  * use this method to wrap the parameters in one object to reduce the reference complexicty
  *   @param x
  *   @param y
  */
-
-function _2dVector(value)
-{
+function _2dVector(value) {
     //create the Map style Array to store the cordination of "X"  and "Y"
     this.dimensionMap = new Array();
     this.dimensionMap["X"] = value["X"];
@@ -74,14 +62,14 @@ function _2dVector(value)
     }
 
 }
-/**this is the class for the handelling the calculations related to the masspoints
+/**
+ * handelling the calculations related to the masspoints
  * get the values form the out side files
  * @param weight
  * @param dimension
  */
 
-function _MassPoint(weight, dimension)
-{
+function _MassPoint(weight, dimension) {
     var dimensionArray = new Array();
     this.currentPosition = new _2dVector(dimension);
     this.previousPosition = new _2dVector(dimension);
@@ -133,14 +121,12 @@ function _MassPoint(weight, dimension)
     //add the value for the force
     this.addValueForce = function(value) {
         this.force.addValueDimention(value);
-
     }
 
     //subsctract the values from the force
     this.subValueForce = function(value) {
         this.force.subValueDimention(value);
     }
-
 
     //function for the movement calculation
     this.movement = function(time) {
@@ -150,7 +136,6 @@ function _MassPoint(weight, dimension)
         //Array for the store the value for the Y cordination
         var arrayY = new Array();
         arrayY["Y"] = 0.0;
-
 
         //Hash map style array to store the X coordination array and Y coordination array
         var map = new Array();
@@ -175,7 +160,6 @@ function _MassPoint(weight, dimension)
 
          in here use the dimention array for the calculation and with the force dimention calculate the mass point dimentions
 
-
          **/
         for (var key in map) {
             accelaration = this.force.getValueDimention(map[key]) / this.weight;
@@ -187,27 +171,25 @@ function _MassPoint(weight, dimension)
         this.currentPosition.setValueDimention(newPosition);
     }
 
-    /** this function draw the masspoints with using the coordination of the mass points
+    /** function draw the masspoints with using the coordination of the mass points
      * get the context of the canvas and draw on it.
      *
      * @param ctx
      */
 
     this.draw = function(ctx) {
-
         //store the current x and y coordination on the array for the drawing
         var arrayX = new Array();
         arrayX["X"] = 0.0;
 
         var arrayY = new Array();
         arrayY["Y"] = 0.0;
-
-
+        
         var map = new Array();
         map["X"] = 0.0;
         map["Y"] = 0.0;
 
-        //this set the line and position of the masspoint for the draw
+        //set the line and position of the masspoint for the draw
         //mass point represent as the sphere in the environment
         ctx.lineWidth = 2;
         ctx.fillStyle = '#B20000';
@@ -217,20 +199,16 @@ function _MassPoint(weight, dimension)
                 this.currentPosition.getValueDimention(arrayY),
                 1.0, 0.0, Math.PI * 2.0, true);
         ctx.fill();
-
     }
-
-
 }
-/**this is the class handel the calculations related to the spring
+/**class handel the calculations related to the spring
  * get the values from the outside files
  *
  * @param pointMassA
  * @param pointMassB
  */
 
-function _Spring(pointMassA, pointMassB)
-{
+function _Spring(pointMassA, pointMassB) {
     //set the mass point A
     this.pointMassA = pointMassA;
     //set the mass point B
@@ -255,9 +233,7 @@ function _Spring(pointMassA, pointMassB)
     //if the result distance between masses are not in the range what we declare we get the difference between result length
     //and we add that to the result length
 
-
-    this.constraints = function()
-    {
+    this.constraints = function() {
         //get the array for the store the difference
         var differenceMap = new Array();
         differenceMap["X"] = 0.0;
@@ -300,16 +276,14 @@ function _Spring(pointMassA, pointMassB)
     }
 
     //this function draw the spring in the given context .context should pass as the parameter
-    this.draw = function(ctx)
-    {
+    this.draw = function(ctx) {
         //get the arrays for the store the x ans y cordinations
         var arrayX = new Array();
         arrayX["X"] = 0.0;
 
         var arrayY = new Array();
         arrayY["Y"] = 0.0;
-
-
+        
         var map = new Array();
         map["X"] = 0.0;
         map["Y"] = 0.0;
@@ -327,7 +301,6 @@ function _Spring(pointMassA, pointMassB)
             alert(e)
         }
         ctx.stroke();
-
     }
 }
 
@@ -340,13 +313,13 @@ function generateMap() {
 
 }
 
-//this is the global variable to generate the inital array for the calculaion
+//global variable to generate the inital array for the calculaion
 var initialDimensionArray = new Array();
 initialDimensionArray["X"] = 0.0;
 initialDimensionArray["Y"] = 0.0;
 
 
-//this is the global javasctript object to store the min length and maxlength of the spring
+//global javasctript object to store the min length and maxlength of the spring
 var _appGlobals = {
     minLength:0.99,
     maxLength:1.01
